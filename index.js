@@ -7,6 +7,9 @@ const connection = require("./database/database")
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArticlesController");
 
+const Article = require("./articles/Article");
+const Category = require("./categories/Category");
+
 // View engine
 app.set('view engine','ejs');
 
@@ -22,7 +25,7 @@ app.use(bodyParser.json());
 connection
     .authenticate()
     .then(()=>{
-        console.log("Success Conection")
+        console.log("Success Connection")
     }).catch((error) => {
         console.log(error);
     })
@@ -42,5 +45,5 @@ app.get("/", (req,res) => {
 
 
 app.listen(8080, () =>{
-    console.log("O servidor está rodando ...");
+    console.log("O servido está rodando ...");
 })
