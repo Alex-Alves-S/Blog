@@ -23,6 +23,7 @@ router.post("/categories/save", (req,res) =>{
     }
 });
 
+//Exibir Categorias
 router.get("/admin/categories", (req,res) =>{
     Category.findAll().then(categories =>{
         res.render("admin/categories/index", {categories: categories});
@@ -67,6 +68,7 @@ router.get("/admin/categories/edit/:id", (req, res) => {
     })
 });
 
+//Update category
 router.post("/categories/update", (req, res)=>{
     var id= req.body.id;
     var title= req.body.title;
