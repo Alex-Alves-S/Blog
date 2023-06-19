@@ -37,9 +37,16 @@ connection
  
 
 app.get("/", (req,res) => {
-    Article.findAll().then(articles => {
-        res.render("index", {articles: articles});
-    })
+    Article.findAll({
+        order:[
+            ['id','DESC']
+        ]
+    }
+    ).then(articles => {
+        Category.findAll().then(categories => {
+            res.render("index", {articles: articles, categories: categories});
+        });
+    });
 })
 
 app.get("/:slug", (req, res) => {
@@ -50,13 +57,33 @@ app.get("/:slug", (req, res) => {
         }
     }).then(article =>{
         if(article != undefined){
-            res.render("");
+            Category.findAll().then(categories => {
+                res.render("article", {article: article, categories: categories});
+            });
         }else{
             res.redirect("/");
         }
     }).catch(erro => {
         res.redirect("/");
     });
+})
+
+app.get("/articles/:slug", (req, res) => {
+    var slug = req.params.slug;
+    Category.findOne({
+        where: {
+            slug: slug
+        },
+        include:[{model: Article}]
+    }).then(category => {
+        if(category != undefined){
+
+        }else{
+            res.redirect("/");
+        }
+    }).catch(erro => {
+        res.redirect("/");
+    })
 })
 
 app.listen(8080, () =>{
