@@ -61,7 +61,7 @@ router.get("/admin/articles/edit/:id", (req, res) => {
                 res.render("admin/articles/edit", {categories: categories, article: article})
             });
         }else{
-            res.redirect("/");
+            res.redirect("/admin/articles");
         }
     }).catch(err => {
         res.redirect("/");
