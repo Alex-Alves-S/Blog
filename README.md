@@ -1,2 +1,2 @@
 # Blog
-Segundo Projeto do curso Node Js,
+Segundo Projeto do curso Node Js.
